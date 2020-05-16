@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using AvailableStocksBroker.Models;
 
-namespace TemplateStockExchange.Data
+namespace AvailableStocksBroker.Data
 {
     public class AppDbContext : DbContext
     {
@@ -12,11 +13,11 @@ namespace TemplateStockExchange.Data
         {
 
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
         }
 
         private void SeedData(ModelBuilder builder)
@@ -24,5 +25,6 @@ namespace TemplateStockExchange.Data
 
         }
 
+        public DbSet<AvailableStocksBroker.Models.AvailableStock> AvailableStock { get; set; }
     }
 }

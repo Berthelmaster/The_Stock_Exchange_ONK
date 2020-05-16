@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateStockExchange", "TemplateStockExchange\TemplateStockExchange.csproj", "{6C6A4FB5-86EB-4BFB-B78C-5E619C594A8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvailableStocksBroker", "AvailableStocksBroker\AvailableStocksBroker.csproj", "{144FC389-301F-4702-AC50-7D52DAF8F3C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockShareRequester", "StockShareRequester\StockShareRequester.csproj", "{0233BFCF-937B-45AF-AF7A-6456147F97BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6C6A4FB5-86EB-4BFB-B78C-5E619C594A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C6A4FB5-86EB-4BFB-B78C-5E619C594A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C6A4FB5-86EB-4BFB-B78C-5E619C594A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C6A4FB5-86EB-4BFB-B78C-5E619C594A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{144FC389-301F-4702-AC50-7D52DAF8F3C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{144FC389-301F-4702-AC50-7D52DAF8F3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{144FC389-301F-4702-AC50-7D52DAF8F3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{144FC389-301F-4702-AC50-7D52DAF8F3C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0233BFCF-937B-45AF-AF7A-6456147F97BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0233BFCF-937B-45AF-AF7A-6456147F97BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0233BFCF-937B-45AF-AF7A-6456147F97BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0233BFCF-937B-45AF-AF7A-6456147F97BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

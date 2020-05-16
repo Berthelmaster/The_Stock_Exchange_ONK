@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using StockShareRequester.Models;
 
-namespace TemplateStockExchange.Data
+namespace StockShareRequester.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext :  DbContext
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
 
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
         }
 
         private void SeedData(ModelBuilder builder)
@@ -24,5 +25,6 @@ namespace TemplateStockExchange.Data
 
         }
 
+        public DbSet<StockShareRequester.Models.Stock> Stock { get; set; }
     }
 }
