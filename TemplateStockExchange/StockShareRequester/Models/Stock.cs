@@ -19,6 +19,7 @@ namespace StockShareRequester.Models
             Buyer = buyer;
             TimeStamp = timeStamp;
         }
+
         [Key]
         public int Id { get; set; }
         public int Price { get; set; }
