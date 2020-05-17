@@ -17,14 +17,15 @@ namespace AvailableStocksBroker.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
         }
 
         private void SeedData(ModelBuilder builder)
         {
-
+            
         }
 
-        public DbSet<AvailableStocksBroker.Models.AvailableStock> AvailableStock { get; set; }
+        public DbSet<Stock> AvailableStocks { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

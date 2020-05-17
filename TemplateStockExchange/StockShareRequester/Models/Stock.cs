@@ -35,13 +35,15 @@ namespace StockShareRequester.Models
 
         [Key]
         public int Id { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
+        public double FullPrice { get; set; }
+        public double Balance { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public string Seller { get; set; }
         public string Buyer { get; set; }
         public DateTime TimeStamp { get; set; }
         public User User { get; set; }
-
+        public int UserId { get; set; }
     }
 }

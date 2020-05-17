@@ -48,7 +48,7 @@ namespace StockShareRequester.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Stock>> GetStock(int id)
         {
-            var stock = await _context.Stock.FindAsync(id);
+            var stock = await _context.Stocks.FindAsync(id);
 
             if (stock == null)
             {
@@ -96,7 +96,7 @@ namespace StockShareRequester.Controllers
         [HttpPost]
         public async Task<ActionResult<Stock>> PostStock(Stock stock)
         {
-            _context.Stock.Add(stock);
+            _context.Stocks.Add(stock);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetStock", new { id = stock.Id }, stock);
@@ -106,13 +106,13 @@ namespace StockShareRequester.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Stock>> DeleteStock(int id)
         {
-            var stock = await _context.Stock.FindAsync(id);
+            var stock = await _context.Stocks.FindAsync(id);
             if (stock == null)
             {
                 return NotFound();
             }
 
-            _context.Stock.Remove(stock);
+            _context.Stocks.Remove(stock);
             await _context.SaveChangesAsync();
 
             return stock;
@@ -120,7 +120,7 @@ namespace StockShareRequester.Controllers
 
         private bool StockExists(int id)
         {
-            return _context.Stock.Any(e => e.Id == id);
+            return _context.Stocks.Any(e => e.Id == id);
         }
     }
 }
