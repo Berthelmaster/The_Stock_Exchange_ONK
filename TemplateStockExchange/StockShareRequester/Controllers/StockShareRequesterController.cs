@@ -37,7 +37,7 @@ namespace StockShareRequester.Controllers
             using (client)
             {
                 client.BaseAddress = new Uri(ip);
-                response = await client.PostAsJsonAsync("api/AvailableStocks", stock);
+                response = await client.PutAsJsonAsync("api/AvailableStocks/" + id, stock);
             }
 
             return response.StatusCode;

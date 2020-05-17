@@ -9,20 +9,22 @@ namespace TobinTaxControl.Models
 {
     public class User
     {
-        public User(int id, string name, string email, string password)
+        public User(int id, string name, string email, double balance, string password)
         {
             Id = id;
             Name = name;
             Email = email;
             Password = password;
+            Balance = balance;
         }
 
-        public User(int id, string name, string email, string password, List<Stock> stocks)
+        public User(int id, string name, string email, string password, double balance, List<Stock> stocks)
         {
             Id = id;
             Name = name;
             Email = email;
             Password = password;
+            Balance = balance;
             Stocks = stocks;
         }
 
@@ -32,6 +34,7 @@ namespace TobinTaxControl.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public double Balance { get; set; }
         public List<Stock> Stocks { get; set; }
 
        
