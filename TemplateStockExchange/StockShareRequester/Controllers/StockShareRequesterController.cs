@@ -27,100 +27,20 @@ namespace StockShareRequester.Controllers
             _context = context;
         }
 
-        // GET: api/StockShareRequester
-        [HttpGet]
-        public async Task<HttpStatusCode> GetStock()
+
+        // PUT: api/StockShareRequester/5
+        [HttpPut("{id}")]
+        public async Task<HttpStatusCode> BuyStock(int id, Stock stock)
         {
             HttpResponseMessage response;
 
-            using ( client )
+            using (client)
             {
                 client.BaseAddress = new Uri(ip);
-                Stock stock = new Stock(3, 100, "myStock", 10, "Florent", "Thomas", DateTime.Now);
                 response = await client.PostAsJsonAsync("api/AvailableStocks", stock);
             }
-           
 
             return response.StatusCode;
-        }
-
-        // GET: api/StockShareRequester/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Stock>> GetStock(int id)
-        {
-            var stock = await _context.Stock.FindAsync(id);
-
-            if (stock == null)
-            {
-                return NotFound();
-            }
-
-            return stock;
-        }
-
-        // PUT: api/StockShareRequester/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutStock(int id, Stock stock)
-        {
-            if (id != stock.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(stock).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StockExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/StockShareRequester
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Stock>> PostStock(Stock stock)
-        {
-            _context.Stock.Add(stock);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetStock", new { id = stock.Id }, stock);
-        }
-
-        // DELETE: api/StockShareRequester/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Stock>> DeleteStock(int id)
-        {
-            var stock = await _context.Stock.FindAsync(id);
-            if (stock == null)
-            {
-                return NotFound();
-            }
-
-            _context.Stock.Remove(stock);
-            await _context.SaveChangesAsync();
-
-            return stock;
-        }
-
-        private bool StockExists(int id)
-        {
-            return _context.Stock.Any(e => e.Id == id);
         }
     }
 }
