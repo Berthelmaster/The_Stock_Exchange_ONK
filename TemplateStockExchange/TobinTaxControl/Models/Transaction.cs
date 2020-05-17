@@ -14,5 +14,12 @@ namespace TobinTaxControl.Models
         public Stock Stock { get; set; }
         public double currentStockPrice { get; set; }
         public double amountSubtracted { get; set; }
+
+        public Transaction(Stock stock, double currentStockPrice, double amountSubtracted)
+        {
+            Stock = stock;
+            this.currentStockPrice = currentStockPrice;
+            this.amountSubtracted = amountSubtracted;
+        }
     }
 }

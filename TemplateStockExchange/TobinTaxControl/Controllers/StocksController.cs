@@ -19,7 +19,7 @@ namespace TobinTaxControl.Controllers
     {
         private readonly AppDbContext _context;
         static HttpClient client = new HttpClient();
-        private readonly string ip = "https://localhost:44341/";
+        private readonly string UserStocksIp = "https://localhost:44341/";
 
         public StocksController(AppDbContext context)
         {
@@ -35,15 +35,20 @@ namespace TobinTaxControl.Controllers
 
             Transaction transaction = new Transaction(stock, stock.Price, stock.Price * 0.01);
 
+            _context.Add(transaction);
+
+            await _context.SaveChangesAsync();
+
             var newStockPrice = stock.Price * 0.99;
 
             stock.Price = newStockPrice;
 
             using ( client )
             {
-                client.BaseAddress = new Uri(ip);
+                client.BaseAddress = new Uri(UserStocksIp);
                 response = await client.PostAsJsonAsync("api/UserStocks", stock);
             }
+
 
             return response.StatusCode;
         }
