@@ -10,24 +10,24 @@ namespace TobinTaxControl.Models
     public class Stock
     {
 
-        public Stock(int id, int price, string name, int quantity, string seller, string buyer, DateTime timeStamp, User user)
+        public Stock(int id, double  price, double fullprice, string name, string seller, string buyer, DateTime timeStamp, User user)
         {
             Id = id;
             Price = price;
+            FullPrice = fullprice;
             Name = name;
-            Quantity = quantity;
             Seller = seller;
             Buyer = buyer;
             TimeStamp = timeStamp;
             User = user;
         }
 
-        public Stock(int id, int price, string name, int quantity, string seller, string buyer, DateTime timeStamp)
+        public Stock(int id, double price, double fullprice, string name, string seller, string buyer, DateTime timeStamp)
         {
             Id = id;
             Price = price;
+            FullPrice = fullprice;
             Name = name;
-            Quantity = quantity;
             Seller = seller;
             Buyer = buyer;
             TimeStamp = timeStamp;
@@ -35,9 +35,9 @@ namespace TobinTaxControl.Models
 
         [Key]
         public int Id { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
+        public double FullPrice { get; set; }
         public string Name { get; set; }
-        public int Quantity { get; set; }
         public string Seller { get; set; }
         public string Buyer { get; set; }
         public DateTime TimeStamp { get; set; }
