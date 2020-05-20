@@ -9,17 +9,19 @@ namespace TobinTaxControl.Models
 {
     public class Transaction
     {
+        public Transaction(string state, int stockId, double currentStockPrice, double amountSubtracted)
+        {
+            State = state;
+            StockId = stockId;
+            CurrentStockPrice = currentStockPrice;
+            AmountSubtracted = amountSubtracted;
+        }
+
         [Key]
         public int Id { get; set; }
-        public Stock Stock { get; set; }
-        public double currentStockPrice { get; set; }
-        public double amountSubtracted { get; set; }
-
-        public Transaction(Stock stock, double currentStockPrice, double amountSubtracted)
-        {
-            Stock = stock;
-            this.currentStockPrice = currentStockPrice;
-            this.amountSubtracted = amountSubtracted;
-        }
+        public string State { get; set; }
+        public int StockId { get; set; }
+        public double CurrentStockPrice { get; set; }
+        public double AmountSubtracted { get; set; }
     }
 }
