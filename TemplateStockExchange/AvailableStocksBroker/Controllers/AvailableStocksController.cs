@@ -85,8 +85,8 @@ namespace AvailableStocksBroker.Controllers
         // POST: api/AvailableStocks
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<HttpStatusCode> PostStock(Stock stock)
+        [HttpPost("{userId}") ]
+        public async Task<HttpStatusCode> PostStock(int userId, Stock stock)
         {
             HttpResponseMessage responseMessageTobinTax;
             HttpResponseMessage responseMessageUserStocksDeleteStock;
@@ -107,7 +107,7 @@ namespace AvailableStocksBroker.Controllers
                 HttpRequestMessage request = new HttpRequestMessage
                 {
                     Method = HttpMethod.Delete,
-                    RequestUri = new Uri(UserStocksIp + deleteCallUserStocks),
+                    RequestUri = new Uri(UserStocksIp + deleteCallUserStocks + userId),
                     Content = new StringContent(JsonConvert.SerializeObject(stock), Encoding.UTF8, "application/json")
                 };
 
@@ -123,8 +123,8 @@ namespace AvailableStocksBroker.Controllers
         }
 
         // DELETE: api/AvailableStocks/5
-        [HttpDelete("{id}")]
-        public async Task<HttpStatusCode> DeleteStock(int id, Stock stock)
+        [HttpDelete("{userId}")]
+        public async Task<HttpStatusCode> DeleteStock(int userId, Stock stock)
         {
             HttpResponseMessage responseMessageTobinTax;
             HttpResponseMessage responseMessageUserStocks;
@@ -137,7 +137,7 @@ namespace AvailableStocksBroker.Controllers
 
             if(responseMessageTobinTax.StatusCode == HttpStatusCode.OK)
             {
-                responseMessageUserStocks = await client.PostAsJsonAsync("api/UserStocks", stock);
+                responseMessageUserStocks = await client.PostAsJsonAsync("api/UserStocks" + userId, stock);
 
                 _context.AvailableStocks.Remove(stock);
                 await _context.SaveChangesAsync();
