@@ -132,6 +132,8 @@ namespace UserStocksBroker.Controllers
         {
             Stock newStock = new Stock(stock.Id, stock.Price, stock.FullPrice, stock.Name, stock.Quantity, stock.Seller, stock.Buyer, stock.TimeStamp, userId);
 
+            HttpResponseMessage response;
+
             _context.Add(newStock);
 
             await _context.SaveChangesAsync();
@@ -142,6 +144,33 @@ namespace UserStocksBroker.Controllers
                 response = await client.PutAsJsonAsync("api/UserController/" + userId, stock);
             }
 
+            return response.StatusCode;
+        }
+
+        // Used for when you want to sell a stock and therefore delete it for your portfolio
+        [HttpDelete("{userId}")]
+        public async Task<HttpStatusCode> SellStock(int userId, Stock stock)
+        {
+            var query = await _context.Stock.Where(s => s.Id == stock.Id).FirstOrDefaultAsync();
+
+            HttpResponseMessage response;
+
+            if(query != null)
+            {
+                _context.Remove(query);
+            }
+            else
+            {
+                Console.WriteLine("Error, no stock found");
+            }
+
+            using (client)
+            {
+                client.BaseAddress = new Uri(userControllerIp);
+                response = await client.PutAsJsonAsync("api/UserController/" + userId, stock);
+            }
+
+            return response.StatusCode;            
         }
     }
 }

@@ -20,9 +20,8 @@ namespace AvailableStocksBroker.Controllers
     {
         static HttpClient client = new HttpClient();
         private readonly AppDbContext _context;
-#warning change this
         private readonly string TobinTaxIp = "https://localhost:44341/";
-        private readonly string UserStocksIp = "https://localhost:44341/";
+        private readonly string UserStocksIp = "https://localhost:44351/";
 
         public AvailableStocksController(AppDbContext context)
         {
