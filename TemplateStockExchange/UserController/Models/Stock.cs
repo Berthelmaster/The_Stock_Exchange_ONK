@@ -42,6 +42,7 @@ namespace UserController.Models
         public string Buyer { get; set; }
         public DateTime TimeStamp { get; set; }
         public User User { get; set; }
+        public int UserId { get; set; }
 
     }
 }
