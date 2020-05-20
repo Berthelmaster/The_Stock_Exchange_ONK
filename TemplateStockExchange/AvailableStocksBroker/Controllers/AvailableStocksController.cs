@@ -94,7 +94,7 @@ namespace AvailableStocksBroker.Controllers
             using (client)
             {
                 client.BaseAddress = new Uri(TobinTaxIp);
-                responseMessageTobinTax = client.PutAsJsonAsync("api/TobinTax", stock).GetAwaiter().GetResult();
+                responseMessageTobinTax = client.PutAsJsonAsync("api/TobinTax/sell", stock).GetAwaiter().GetResult();
             }
             _context.AvailableStocks.Add(stock);
             await _context.SaveChangesAsync();
@@ -132,12 +132,12 @@ namespace AvailableStocksBroker.Controllers
             using (client)
             {
                 client.BaseAddress = new Uri(TobinTaxIp);
-                responseMessageTobinTax = client.PutAsJsonAsync("api/TobinTax", stock).GetAwaiter().GetResult();
+                responseMessageTobinTax = client.PutAsJsonAsync("api/TobinTax/buy", stock).GetAwaiter().GetResult();
             }
 
             if(responseMessageTobinTax.StatusCode == HttpStatusCode.OK)
             {
-                responseMessageUserStocks = await client.PostAsJsonAsync("api/TobinTax", stock);
+                responseMessageUserStocks = await client.PostAsJsonAsync("api/UserStocks", stock);
 
                 _context.AvailableStocks.Remove(stock);
                 await _context.SaveChangesAsync();
