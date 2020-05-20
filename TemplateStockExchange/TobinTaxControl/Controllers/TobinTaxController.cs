@@ -29,6 +29,7 @@ namespace TobinTaxControl.Controllers
         // Used for BuyStock feature
         // PUT: api/Stocks/5
         [HttpPost]
+        [Route("buy")]
         public async Task<ActionResult> TaxBuyStock(Stock stock)
         {
             Transaction transaction = new Transaction(_buy ,stock.Id, stock.Price, stock.FullPrice - stock.Price);
@@ -41,6 +42,7 @@ namespace TobinTaxControl.Controllers
         }
 
         [HttpPost]
+        [Route("sell")]
         public async Task<ActionResult> TaxSellStock(Stock stock)
         {
             Transaction transaction = new Transaction(_sell ,stock.Id, stock.Price, stock.FullPrice - stock.Price);

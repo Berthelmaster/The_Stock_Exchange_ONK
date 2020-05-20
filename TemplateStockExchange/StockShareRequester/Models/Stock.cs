@@ -37,7 +37,6 @@ namespace StockShareRequester.Models
         public int Id { get; set; }
         public double Price { get; set; }
         public double FullPrice { get; set; }
-        public double Balance { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public string Seller { get; set; }
