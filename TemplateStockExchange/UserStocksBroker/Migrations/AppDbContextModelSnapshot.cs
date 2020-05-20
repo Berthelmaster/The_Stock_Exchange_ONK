@@ -50,6 +50,8 @@ namespace UserStocksBroker.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Stock");
 
                     b.HasData(
@@ -62,7 +64,7 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 125, DateTimeKind.Local).AddTicks(2366),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 71, DateTimeKind.Local).AddTicks(3921),
                             UserId = 1
                         },
                         new
@@ -74,7 +76,7 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 127, DateTimeKind.Local).AddTicks(6732),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 73, DateTimeKind.Local).AddTicks(8513),
                             UserId = 1
                         },
                         new
@@ -86,7 +88,7 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 127, DateTimeKind.Local).AddTicks(6840),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 73, DateTimeKind.Local).AddTicks(8617),
                             UserId = 1
                         },
                         new
@@ -98,7 +100,7 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 127, DateTimeKind.Local).AddTicks(6848),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 73, DateTimeKind.Local).AddTicks(8623),
                             UserId = 2
                         },
                         new
@@ -110,7 +112,7 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 127, DateTimeKind.Local).AddTicks(6851),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 73, DateTimeKind.Local).AddTicks(8626),
                             UserId = 2
                         },
                         new
@@ -122,7 +124,7 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 127, DateTimeKind.Local).AddTicks(6855),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 73, DateTimeKind.Local).AddTicks(8629),
                             UserId = 2
                         },
                         new
@@ -134,7 +136,7 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 127, DateTimeKind.Local).AddTicks(6858),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 73, DateTimeKind.Local).AddTicks(8632),
                             UserId = 3
                         },
                         new
@@ -146,7 +148,7 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 127, DateTimeKind.Local).AddTicks(6861),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 73, DateTimeKind.Local).AddTicks(8635),
                             UserId = 3
                         },
                         new
@@ -158,9 +160,42 @@ namespace UserStocksBroker.Migrations
                             Price = 1.0,
                             Quantity = 1,
                             Seller = "seller",
-                            TimeStamp = new DateTime(2020, 5, 20, 21, 3, 13, 127, DateTimeKind.Local).AddTicks(6864),
+                            TimeStamp = new DateTime(2020, 5, 20, 22, 23, 14, 73, DateTimeKind.Local).AddTicks(8638),
                             UserId = 3
                         });
+                });
+
+            modelBuilder.Entity("UserStocksBroker.Models.UserStockCollection", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        },
+                        new
+                        {
+                            Id = 2
+                        },
+                        new
+                        {
+                            Id = 3
+                        });
+                });
+
+            modelBuilder.Entity("UserStocksBroker.Models.Stock", b =>
+                {
+                    b.HasOne("UserStocksBroker.Models.UserStockCollection", "User")
+                        .WithMany("Stocks")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

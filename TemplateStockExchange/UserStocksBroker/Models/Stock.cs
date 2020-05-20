@@ -20,6 +20,7 @@ namespace UserStocksBroker.Models
         public string Seller { get; set; }
         public string Buyer { get; set; }
         public DateTime TimeStamp { get; set; }
+        public UserStockCollection User { get; set; }
         public int UserId { get; set; }
 
         public Stock(int id, double price, double fullPrice, string name, int quantity, string seller, string buyer, DateTime timeStamp, int userId)
