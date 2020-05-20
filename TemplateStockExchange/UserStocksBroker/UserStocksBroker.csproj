@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200520182524_inituserstockbroker.cs" />
     <Compile Remove="Migrations\20200520182524_inituserstockbroker.Designer.cs" />
+    <Compile Remove="Migrations\20200520182623_inituserstockbroker.cs" />
+    <Compile Remove="Migrations\20200520182623_inituserstockbroker.Designer.cs" />
+    <Compile Remove="Migrations\20200520190008_seeddata.cs" />
+    <Compile Remove="Migrations\20200520190008_seeddata.Designer.cs" />
+    <Compile Remove="Migrations\20200520190130_seeddata1.cs" />
+    <Compile Remove="Migrations\20200520190130_seeddata1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
