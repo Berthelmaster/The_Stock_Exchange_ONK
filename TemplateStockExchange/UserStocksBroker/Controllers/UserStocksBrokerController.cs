@@ -141,7 +141,7 @@ namespace UserStocksBroker.Controllers
             using (client)
             {
                 client.BaseAddress = new Uri(userControllerIp);
-                response = await client.PutAsJsonAsync("api/UserController/" + userId, stock);
+                response = await client.PutAsJsonAsync("api/UserController/buy/" + userId, stock);
             }
 
             return response.StatusCode;
@@ -167,7 +167,7 @@ namespace UserStocksBroker.Controllers
             using (client)
             {
                 client.BaseAddress = new Uri(userControllerIp);
-                response = await client.PutAsJsonAsync("api/UserController/" + userId, stock);
+                response = await client.PutAsJsonAsync("api/UserController/sell/" + userId, stock);
             }
 
             return response.StatusCode;            
