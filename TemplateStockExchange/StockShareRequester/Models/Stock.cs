@@ -33,6 +33,11 @@ namespace StockShareRequester.Models
             TimeStamp = timeStamp;
         }
 
+        public Stock()
+        {
+
+        }
+
         [Key]
         public int Id { get; set; }
         public double Price { get; set; }
