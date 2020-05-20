@@ -162,7 +162,6 @@ namespace UserStocksBroker.Controllers
             else
             {
                 Console.WriteLine("Error, no stock found");
-
             }
 
             using (client)
