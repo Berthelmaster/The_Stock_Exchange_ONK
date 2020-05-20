@@ -18,7 +18,7 @@ namespace StockShareRequester.Controllers
     public class StockShareRequesterController : ControllerBase
     {
         private readonly AppDbContext _context;
-        static HttpClient client = new HttpClient();
+        private static HttpClient client = new HttpClient();
         private readonly string ip = "https://localhost:44336/";
         
 
@@ -29,15 +29,15 @@ namespace StockShareRequester.Controllers
 
 
         // PUT: api/StockShareRequester/5
-        [HttpPut("{id}")]
-        public async Task<HttpStatusCode> BuyStock(int id, Stock stock)
+        [HttpPut("{userId}")]
+        public async Task<HttpStatusCode> BuyStock(int userId, Stock stock)
         {
             HttpResponseMessage response;
 
             using (client)
             {
                 client.BaseAddress = new Uri(ip);
-                response = await client.PutAsJsonAsync("api/AvailableStocks/" + id, stock);
+                response = await client.PutAsJsonAsync("api/AvailableStocks/" + userId, stock);
             }
 
             return response.StatusCode;
