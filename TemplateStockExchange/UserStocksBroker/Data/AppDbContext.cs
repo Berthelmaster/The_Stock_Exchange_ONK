@@ -16,6 +16,11 @@ namespace UserStocksBroker.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Stock>()
+                .HasOne(s => s.User)
+                .WithMany(u => u.Stocks)
+                .HasForeignKey(s => s.UserId);
+
             SeedData(modelBuilder);
         }
 
@@ -31,6 +36,10 @@ namespace UserStocksBroker.Data
             Stock stock8 = new Stock(8, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 3);
             Stock stock9 = new Stock(9, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 3);
 
+            UserStockCollection flow_user = new UserStockCollection(1);
+            UserStockCollection ras_user = new UserStockCollection(2);
+            UserStockCollection thom_user = new UserStockCollection(3);
+
             builder.Entity<Stock>()
                 .HasData(
                     stock1,
@@ -43,9 +52,17 @@ namespace UserStocksBroker.Data
                     stock8,
                     stock9
                 );
+
+            builder.Entity<UserStockCollection>()
+                .HasData(
+                flow_user,
+                ras_user,
+                thom_user
+                );
         }
 
         public DbSet<Stock> Stock { get; set; }
+        public DbSet<UserStockCollection> User { get; set; }
 
     }
 }
