@@ -23,7 +23,7 @@ namespace UserController.Controllers
             _context = context;
         }
 
-        // Used for Authentication Login
+        // Used for Authentication Login - No Encryption
         [HttpGet]
         public async Task<ActionResult<User>> Login(LoginDto logindetails)
         {
