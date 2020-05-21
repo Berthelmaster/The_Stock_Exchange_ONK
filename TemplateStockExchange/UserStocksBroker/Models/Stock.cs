@@ -35,5 +35,10 @@ namespace UserStocksBroker.Models
             TimeStamp = timeStamp;
             UserId = userId;
         }
+
+        public Stock()
+        {
+
+        }
     }
 }

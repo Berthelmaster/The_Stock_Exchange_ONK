@@ -57,5 +57,10 @@ namespace TobinTaxControl.Models
             TimeStamp = timeStamp;
             UserId = userId;
         }
+
+        public Stock()
+        {
+
+        }
     }
 }

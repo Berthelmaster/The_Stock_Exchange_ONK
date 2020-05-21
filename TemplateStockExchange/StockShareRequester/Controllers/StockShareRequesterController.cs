@@ -10,6 +10,7 @@ using StockShareRequester.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net;
+using System.Text;
 
 namespace StockShareRequester.Controllers
 {
@@ -18,7 +19,6 @@ namespace StockShareRequester.Controllers
     public class StockShareRequesterController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private static HttpClient client = new HttpClient();
         private readonly string ip = "https://localhost:44336/";
         
 
@@ -34,11 +34,17 @@ namespace StockShareRequester.Controllers
         {
             HttpResponseMessage response;
 
-            using (client)
+            HttpClient client = new HttpClient();
+
+            HttpRequestMessage request = new HttpRequestMessage
             {
-                client.BaseAddress = new Uri(ip);
-                response = await client.PutAsJsonAsync("api/AvailableStocks/" + userId, stock);
-            }
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri(ip + "api/AvailableStocks/" + userId),
+                Content = new StringContent(JsonConvert.SerializeObject(stock), Encoding.UTF8, "application/json")
+            };
+
+            response = await client.SendAsync(request);
+            
 
             return response.StatusCode;
         }

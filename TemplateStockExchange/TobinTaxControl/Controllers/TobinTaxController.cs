@@ -28,10 +28,15 @@ namespace TobinTaxControl.Controllers
 
         // Used for BuyStock feature
         // PUT: api/Stocks/5
-        [HttpPost]
         [Route("buy")]
+        [HttpPost]
         public async Task<ActionResult> TaxBuyStock(Stock stock)
         {
+            if(stock == null)
+            {
+                return BadRequest();
+            }
+
             Transaction transaction = new Transaction(_buy ,stock.Id, stock.Price, stock.FullPrice - stock.Price);
 
             _context.Add(transaction);

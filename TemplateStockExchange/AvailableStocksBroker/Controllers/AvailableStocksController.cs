@@ -18,7 +18,6 @@ namespace AvailableStocksBroker.Controllers
     [ApiController]
     public class AvailableStocksController : ControllerBase
     {
-        static HttpClient client = new HttpClient();
         private readonly AppDbContext _context;
         private readonly string TobinTaxIp = "https://localhost:44341/";
         private readonly string UserStocksIp = "https://localhost:44351/";
@@ -89,9 +88,11 @@ namespace AvailableStocksBroker.Controllers
         {
             HttpResponseMessage responseMessageTobinTax;
             HttpResponseMessage responseMessageUserStocksDeleteStock;
+            
 
-            using (client)
+            using (HttpClient client = new HttpClient())
             {
+
                 client.BaseAddress = new Uri(TobinTaxIp);
                 responseMessageTobinTax = client.PutAsJsonAsync("api/TobinTax/sell", stock).GetAwaiter().GetResult();
             }
@@ -101,7 +102,7 @@ namespace AvailableStocksBroker.Controllers
 
             if (responseMessageTobinTax.StatusCode == HttpStatusCode.OK)
             {
-                string deleteCallUserStocks = "api/UserStocks";
+                string deleteCallUserStocks = "api/UserStocks/";
 
                 HttpRequestMessage request = new HttpRequestMessage
                 {
@@ -110,7 +111,11 @@ namespace AvailableStocksBroker.Controllers
                     Content = new StringContent(JsonConvert.SerializeObject(stock), Encoding.UTF8, "application/json")
                 };
 
-                responseMessageUserStocksDeleteStock = await client.SendAsync(request);
+                using (HttpClient client = new HttpClient())
+                {
+                    responseMessageUserStocksDeleteStock = await client.SendAsync(request);
+                }
+               
 
                 _context.AvailableStocks.Add(stock);
                 await _context.SaveChangesAsync();
@@ -128,18 +133,23 @@ namespace AvailableStocksBroker.Controllers
             HttpResponseMessage responseMessageTobinTax;
             HttpResponseMessage responseMessageUserStocks;
 
-            using (client)
+            using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(TobinTaxIp);
-                responseMessageTobinTax = client.PutAsJsonAsync("api/TobinTax/buy", stock).GetAwaiter().GetResult();
+                responseMessageTobinTax = client.PostAsJsonAsync("api/TobinTax/buy/", stock).GetAwaiter().GetResult();
             }
 
             if(responseMessageTobinTax.StatusCode == HttpStatusCode.OK)
             {
-                responseMessageUserStocks = await client.PostAsJsonAsync("api/UserStocks" + userId, stock);
+                using(HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(UserStocksIp);
+                    responseMessageUserStocks = await client.PostAsJsonAsync("api/UserStocksBroker/" + userId, stock);
+                }
+                
 
-                _context.AvailableStocks.Remove(stock);
-                await _context.SaveChangesAsync();
+                //_context.AvailableStocks.Remove(stock);
+                //await _context.SaveChangesAsync();
 
                 return responseMessageUserStocks.StatusCode;
             }
