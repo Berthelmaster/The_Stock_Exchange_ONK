@@ -24,7 +24,8 @@ namespace UserController.Controllers
         }
 
         // Used for Authentication Login - No Encryption
-        [HttpGet]
+        [Route("login")]
+        [HttpPost]
         public async Task<ActionResult<User>> Login(LoginDto logindetails)
         {
             var findUser = await _context.Users.Where(u => u.Email == logindetails.Email && u.Password == logindetails.Password).FirstOrDefaultAsync();

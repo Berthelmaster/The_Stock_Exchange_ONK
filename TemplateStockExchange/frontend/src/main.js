@@ -5,26 +5,30 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import Login from "./components/Login";
 import Mainpage from "./components/Mainpage";
+import vuetify from "./plugins/vuetify";
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false;
-Vue.use(VueRouter)
-Vue.use(VueAxios, axios)
+Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
+Vue.use(vuetify);
 
 const router = new VueRouter({
   routes: [
     {
-      path: '/', component: Login
+      path: "/",
+      component: Login
     },
     {
-      path: '/mainpage', component: Mainpage
-    },
+      path: "/mainpage",
+      component: Mainpage
+    }
   ],
-  mode: 'history'
+  mode: "history"
 });
-
 
 new Vue({
   router,
-
+  vuetify,
   render: h => h(App)
 }).$mount("#app");

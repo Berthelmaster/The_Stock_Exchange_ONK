@@ -1,0 +1,1 @@
+export const authenticationService = 'https://localhost:44383/api/Users/login'
