@@ -48,6 +48,7 @@ namespace UserStocksBroker.Controllers
             if(query != null)
             {
                 _context.Stock.Remove(query);
+                await _context.SaveChangesAsync();
             }
             else
             {
@@ -56,6 +57,14 @@ namespace UserStocksBroker.Controllers
 
 
             return Ok();            
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<List<Stock>> GetStocks(int userId)
+        {
+            var user = await _context.User.Include(e => e.Stocks).Where(e => e.Id == userId).FirstOrDefaultAsync();
+
+            return user.Stocks;
         }
     }
 }

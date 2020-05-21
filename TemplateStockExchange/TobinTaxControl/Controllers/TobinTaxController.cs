@@ -46,8 +46,8 @@ namespace TobinTaxControl.Controllers
             return Ok();
         }
 
-        [HttpPost]
         [Route("sell")]
+        [HttpPost]
         public async Task<ActionResult> TaxSellStock(Stock stock)
         {
             if (stock == null)
