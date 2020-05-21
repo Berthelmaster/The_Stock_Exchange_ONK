@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserController.Data;
 using UserController.Models;
+using UserController.DTO;
 
 namespace UserController.Controllers
 {
@@ -22,11 +23,17 @@ namespace UserController.Controllers
             _context = context;
         }
 
-        // GET: api/Users
+        // Used for Authentication Login
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<User>> Login(LoginDto logindetails)
         {
-            return await _context.Users.ToListAsync();
+            var findUser = await _context.Users.Where(u => u.Email == logindetails.Email && u.Password == logindetails.Password).FirstOrDefaultAsync();
+
+            if (findUser != null)
+                return Ok(findUser);
+
+            return BadRequest();
+
         }
 
         // GET: api/Users/5
