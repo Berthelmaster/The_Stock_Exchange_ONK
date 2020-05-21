@@ -17,7 +17,7 @@ namespace UserStocksBroker.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Stock>()
-                .HasOne(s => s.User)
+                .HasOne(s => s.UserStockCollection)
                 .WithMany(u => u.Stocks)
                 .HasForeignKey(s => s.UserId);
 
@@ -26,15 +26,15 @@ namespace UserStocksBroker.Data
 
         private void SeedData(ModelBuilder builder)
         {
-            Stock stock1 = new Stock(1, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 1);
-            Stock stock2 = new Stock(2, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 1);
-            Stock stock3 = new Stock(3, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 1);
-            Stock stock4 = new Stock(4, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 2);
-            Stock stock5 = new Stock(5, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 2);
-            Stock stock6 = new Stock(6, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 2);
-            Stock stock7 = new Stock(7, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 3);
-            Stock stock8 = new Stock(8, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 3);
-            Stock stock9 = new Stock(9, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 3);
+            Stock stock1 = new Stock(1, 1, 1.1, "flow", 1, DateTime.Now, 1);
+            Stock stock2 = new Stock(2, 1, 1.1, "flow", 1, DateTime.Now, 1);
+            Stock stock3 = new Stock(3, 1, 1.1, "flow", 1, DateTime.Now, 1);
+            Stock stock4 = new Stock(4, 1, 1.1, "flow", 1, DateTime.Now, 2);
+            Stock stock5 = new Stock(5, 1, 1.1, "flow", 1, DateTime.Now, 2);
+            Stock stock6 = new Stock(6, 1, 1.1, "flow", 1, DateTime.Now, 2);
+            Stock stock7 = new Stock(7, 1, 1.1, "flow", 1, DateTime.Now, 3);
+            Stock stock8 = new Stock(8, 1, 1.1, "flow", 1, DateTime.Now, 3);
+            Stock stock9 = new Stock(9, 1, 1.1, "flow", 1, DateTime.Now, 3);
 
             UserStockCollection flow_user = new UserStockCollection(1);
             UserStockCollection ras_user = new UserStockCollection(2);

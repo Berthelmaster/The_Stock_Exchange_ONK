@@ -17,18 +17,12 @@ namespace UserController.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Stock>()
-                .HasOne(s => s.User)
-                .WithMany(u => u.Stocks)
-                .HasForeignKey(s => s.UserId);
         }
 
         private void SeedData(ModelBuilder builder)
         {
 
         }
-
-        public DbSet<Stock> AvailableStocks { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

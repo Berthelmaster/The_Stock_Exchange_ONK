@@ -22,10 +22,9 @@ namespace AvailableStocksBroker.Data
 
         private void SeedData(ModelBuilder builder)
         {
-            Stock stock10 = new Stock(10, 1, 1.1, "flow", 1, "seller", "buyer", DateTime.Now, 1);
+            Stock stock10 = new Stock(10, 1, 1.1, "flow", 1, DateTime.Now, 1);
         }
 
         public DbSet<Stock> AvailableStocks { get; set; }
-        public DbSet<User> Users { get; set; }
     }
 }

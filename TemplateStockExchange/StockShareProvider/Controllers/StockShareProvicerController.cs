@@ -13,7 +13,7 @@ using StockShareProvider.Models;
 namespace StockShareProvider.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class StockShareProvicerController : ControllerBase
     {
         private readonly string AvailableStocksIp = "https://localhost:44336/";

@@ -43,79 +43,79 @@ namespace UserController.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{userId}")]
-        [Route("sell")]
-        public async Task<HttpStatusCode> SoldStock(int userId, Stock stock)
-        {
-            if (userId != stock.UserId)
-            {
-                return HttpStatusCode.BadRequest;
-            }
+        //// PUT: api/Users/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
+        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[HttpPut("{userId}")]
+        //[Route("sell")]
+        //public async Task<HttpStatusCode> SoldStock(int userId, Stock stock)
+        //{
+        //    if (userId != stock.UserId)
+        //    {
+        //        return HttpStatusCode.BadRequest;
+        //    }
 
-            User user = _context.Users.Where(u => u.Id == userId).First();
+        //    User user = _context.Users.Where(u => u.Id == userId).First();
 
-            user.Stocks.Remove(stock);
-            _context.Entry(user).State = EntityState.Modified;
+        //    user.Stocks.Remove(stock);
+        //    _context.Entry(user).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (user == null)
-                {
-                    return HttpStatusCode.NotFound;
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (user == null)
+        //        {
+        //            return HttpStatusCode.NotFound;
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return HttpStatusCode.OK;
-        }
+        //    return HttpStatusCode.OK;
+        //}
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{userId}")]
-        [Route("buy")]
-        public async Task<HttpStatusCode> BoughtStock(int userId, Stock stock)
-        {
-            if (userId != stock.UserId)
-            {
-                return HttpStatusCode.BadRequest;
-            }
+        //// PUT: api/Users/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
+        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[HttpPut("{userId}")]
+        //[Route("buy")]
+        //public async Task<HttpStatusCode> BoughtStock(int userId, Stock stock)
+        //{
+        //    if (userId != stock.UserId)
+        //    {
+        //        return HttpStatusCode.BadRequest;
+        //    }
 
-            User user = _context.Users.Where(u => u.Id == userId).First();
+        //    User user = _context.Users.Where(u => u.Id == userId).First();
 
-            stock.User = user;
+        //    stock.User = user;
 
-            user.Stocks.Add(stock);
-            _context.Entry(user).State = EntityState.Modified;
+        //    user.Stocks.Add(stock);
+        //    _context.Entry(user).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (user == null)
-                {
-                    return HttpStatusCode.NotFound;
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (user == null)
+        //        {
+        //            return HttpStatusCode.NotFound;
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return HttpStatusCode.OK;
-        }
+        //    return HttpStatusCode.OK;
+        //}
 
         // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

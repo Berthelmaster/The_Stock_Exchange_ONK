@@ -24,8 +24,6 @@ namespace TobinTaxControl.Data
         {
 
         }
-
-        public DbSet<Stock> Stock { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
     }
 }
