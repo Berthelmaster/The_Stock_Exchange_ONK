@@ -37,7 +37,7 @@ namespace TobinTaxControl.Controllers
                 return BadRequest();
             }
 
-            Transaction transaction = new Transaction(_buy ,stock.Id, stock.Price, stock.FullPrice - stock.Price);
+            Transaction transaction = new Transaction(_buy ,stock.Id, stock.Price, stock.FullPrice - stock.Price, DateTime.Now);
 
             _context.Add(transaction);
 
@@ -55,7 +55,7 @@ namespace TobinTaxControl.Controllers
                 return BadRequest();
             }
 
-            Transaction transaction = new Transaction(_sell ,stock.Id, stock.Price, stock.FullPrice - stock.Price);
+            Transaction transaction = new Transaction(_sell ,stock.Id, stock.Price, stock.FullPrice - stock.Price, DateTime.Now);
 
             _context.Add(transaction);
 

@@ -9,12 +9,13 @@ namespace TobinTaxControl.Models
 {
     public class Transaction
     {
-        public Transaction(string state, int stockId, double currentStockPrice, double amountSubtracted)
+        public Transaction(string state, int stockId, double currentStockPrice, double amountSubtracted, DateTime timeStamp)
         {
             State = state;
             StockId = stockId;
             CurrentStockPrice = currentStockPrice;
             AmountSubtracted = amountSubtracted;
+            TimeStamp = timeStamp;
         }
 
         [Key]
@@ -23,5 +24,6 @@ namespace TobinTaxControl.Models
         public int StockId { get; set; }
         public double CurrentStockPrice { get; set; }
         public double AmountSubtracted { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 }
