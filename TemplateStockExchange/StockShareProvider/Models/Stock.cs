@@ -9,39 +9,30 @@ namespace StockShareProvider.Models
 {
     public class Stock
     {
-
-        public Stock(int id, int price, string name, int quantity, string seller, string buyer, DateTime timeStamp, User user)
+        public Stock(int id, double price, double fullPrice, string name, int quantity, DateTime timeStamp, int userId)
         {
             Id = id;
             Price = price;
+            FullPrice = fullPrice;
             Name = name;
             Quantity = quantity;
-            Seller = seller;
-            Buyer = buyer;
+            UserId = userId;
             TimeStamp = timeStamp;
-            User = user;
         }
 
-        public Stock(int id, int price, string name, int quantity, string seller, string buyer, DateTime timeStamp)
+        public Stock()
         {
-            Id = id;
-            Price = price;
-            Name = name;
-            Quantity = quantity;
-            Seller = seller;
-            Buyer = buyer;
-            TimeStamp = timeStamp;
+
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
+        public double FullPrice { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
-        public string Seller { get; set; }
-        public string Buyer { get; set; }
         public DateTime TimeStamp { get; set; }
-        public User User { get; set; }
-
+        public int UserId { get; set; }
     }
 }

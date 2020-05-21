@@ -148,8 +148,8 @@ namespace AvailableStocksBroker.Controllers
                 }
                 
 
-                //_context.AvailableStocks.Remove(stock);
-                //await _context.SaveChangesAsync();
+                _context.AvailableStocks.Remove(stock);
+                await _context.SaveChangesAsync();
 
                 return responseMessageUserStocks.StatusCode;
             }

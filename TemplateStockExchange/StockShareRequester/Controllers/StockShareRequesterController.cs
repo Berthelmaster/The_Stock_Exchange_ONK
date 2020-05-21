@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StockShareRequester.Data;
 using StockShareRequester.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
@@ -18,14 +17,7 @@ namespace StockShareRequester.Controllers
     [ApiController]
     public class StockShareRequesterController : ControllerBase
     {
-        private readonly AppDbContext _context;
         private readonly string ip = "https://localhost:44336/";
-        
-
-        public StockShareRequesterController(AppDbContext context)
-        {
-            _context = context;
-        }
 
 
         // PUT: api/StockShareRequester/5

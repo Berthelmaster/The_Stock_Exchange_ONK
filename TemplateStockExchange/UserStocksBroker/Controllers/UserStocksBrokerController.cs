@@ -30,7 +30,7 @@ namespace UserStocksBroker.Controllers
         {
             //Maybe add stuff to User also?
 
-            Stock newStock = new Stock(stock.Id, stock.Price, stock.FullPrice, stock.Name, stock.Quantity, stock.Seller, stock.Buyer, stock.TimeStamp, userId);
+            Stock newStock = new Stock(stock.Id, stock.Price, stock.FullPrice, stock.Name, stock.Quantity, stock.TimeStamp, userId);
 
             _context.Stock.Add(newStock);
 
