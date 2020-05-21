@@ -50,6 +50,11 @@ namespace TobinTaxControl.Controllers
         [Route("sell")]
         public async Task<ActionResult> TaxSellStock(Stock stock)
         {
+            if (stock == null)
+            {
+                return BadRequest();
+            }
+
             Transaction transaction = new Transaction(_sell ,stock.Id, stock.Price, stock.FullPrice - stock.Price);
 
             _context.Add(transaction);
