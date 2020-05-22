@@ -42,7 +42,7 @@ namespace UserStocksBroker.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_userControllerIp);
-                message = client.PutAsJsonAsync("api/UserController/" + userId, stock).GetAwaiter().GetResult();
+                message = client.PutAsJsonAsync("api/Users/" + userId, stock).GetAwaiter().GetResult();
             }
 
             return message.StatusCode;

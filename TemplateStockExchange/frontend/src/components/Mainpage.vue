@@ -4,7 +4,7 @@
             <v-row>
                 <h1> Hello {{ this.user.name }}!</h1>
                 <v-spacer></v-spacer>
-                <h3>Balance {{ this.user.Balance }}</h3>
+                <h3>Balance: {{ this.user.balance }}$</h3>
             </v-row>
             
             
@@ -26,7 +26,10 @@
                             <v-row >
                                 <h2>Stock: {{ item.name }}</h2>
                                 <h2>{{ item.fullPrice}}$</h2>
-                                <v-btn>Buy</v-btn>
+                                <v-spacer></v-spacer>
+                                <h2>Owner: {{ item.userId }}</h2>
+                                <v-spacer></v-spacer>
+                                <v-btn @click="buyStock(user.id, item)">Buy</v-btn>
                             </v-row>
                         </v-container>
                     </v-container>
@@ -41,6 +44,19 @@
                     >
                     <h2>My Stocks</h2>
 
+                    <v-container>                        
+                        <v-container v-for="item in mystocks" :key="item.id">
+                            <v-row >
+                                <h2>Stock: {{ item.name }}</h2>
+                                <h2>{{ item.fullPrice}}$</h2>
+                                <v-spacer></v-spacer>
+                                <h2>Owner: YOU</h2>
+                                <v-spacer></v-spacer>
+                                <v-btn @click="sellStock(user.id, item)">Sell</v-btn>
+                            </v-row>
+                        </v-container>
+                    </v-container>
+
                     </v-card>
                 </v-col>
             </v-row>
@@ -51,7 +67,7 @@
 
 <script>
 import axios from 'axios';
-import { availablestockService } from '../variables'
+import { availablestockService, buyerService, myStocksService , sellerService, usersService } from '../variables'
 
 export default {
 
@@ -60,7 +76,8 @@ export default {
   data() {
       return{
           user: {},
-          stocks: {}
+          stocks: {},
+          mystocks: {}
       }
   },
 
@@ -71,11 +88,87 @@ export default {
             this.stocks = response.data
             console.log(response.data)
         })
+      },
+
+      buyStock(id, stock)
+      {
+
+        axios.put(buyerService + id, stock)
+        .then((response) => {
+            console.log(response.data)
+            if(response.data == 200)
+            {
+                console.log("im in!")
+                this.updateUI()
+            }
+        }
+        )
+        .catch((error) =>
+        console.log(error))
+        .finally(
+            this.getStocks()
+        )
+
+      },
+
+      sellStock(id, stock)
+      {
+        console.log(sellerService)
+        axios.put(sellerService + id, stock)
+        .then((response) => {
+            console.log(response.data)
+            if(response.data == 200)
+            {
+                console.log("im in!")
+                this.updateUI()
+            }
+        }
+        )
+        .catch((error) =>
+        console.log(error))
+        .finally(
+            this.getStocks()
+        )
+
+      },
+
+      getMyStocks(id)
+      {
+          console.log("myid")
+          console.log(id)
+          console.log(myStocksService)
+          axios.get(myStocksService + id).then((response) => {
+            this.mystocks = response.data
+            console.log(response.data)
+        })
+      },
+
+      getUser(id){
+        console.log("getUser Called")
+        console.log(id)
+
+        axios.get(usersService + id)
+        .then((response) => {
+            console.log("somelog")
+            console.log(response.data)
+            localStorage.setItem('userObject', JSON.stringify(response.data));
+            this.user = JSON.parse(localStorage.getItem('userObject'));
+        })
+      },
+
+      updateUI()
+      {
+          this.getMyStocks(this.user.id);
+          this.getStocks(this.user.id);
+          this.getUser(this.user.id);
       }
+
   },
   created() {
       this.user = JSON.parse(localStorage.getItem('userObject'));
       this.getStocks();
+      this.getMyStocks(this.user.id);
+      this.updateUI();
   }
 };
 </script>

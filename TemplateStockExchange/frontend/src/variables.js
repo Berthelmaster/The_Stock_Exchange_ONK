@@ -1,2 +1,6 @@
 export const authenticationService = 'https://localhost:44383/api/Users/login'
 export const availablestockService = 'https://localhost:44336/api/AvailableStocks'
+export const buyerService = 'https://localhost:44360/api/StockShareRequester/'
+export const sellerService = 'https://localhost:44337/api/StockShareProvicer/'
+export const myStocksService = 'https://localhost:44351/api/UserStocksBroker/'
+export const usersService = 'https://localhost:44383/api/Users/'
