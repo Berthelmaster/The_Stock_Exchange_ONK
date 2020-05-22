@@ -18,6 +18,7 @@ namespace UserStocksBroker.Controllers
     public class UserStocksBrokerController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly string _userControllerIp = "https://localhost:44383/";
 
         public UserStocksBrokerController(AppDbContext context)
         {
@@ -26,9 +27,10 @@ namespace UserStocksBroker.Controllers
 
         // Used for when you want to post a stock to the USB database, when a stock is bought
         [HttpPost("{userId}")]
-        public async Task<ActionResult> BuyStock(int userId, Stock stock)
+        public async Task<HttpStatusCode> BuyStock(int userId, Stock stock)
         {
             //Maybe add stuff to User also?
+            HttpResponseMessage message;
 
             Stock newStock = new Stock(stock.Id, stock.Price, stock.FullPrice, stock.Name, stock.Quantity, stock.TimeStamp, userId);
 
@@ -36,7 +38,14 @@ namespace UserStocksBroker.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok();
+            // Change Balance to seller and buyer
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_userControllerIp);
+                message = client.PutAsJsonAsync("api/UserController/" + userId, stock).GetAwaiter().GetResult();
+            }
+
+            return message.StatusCode;
         }
 
         // Used for when you want to sell a stock and therefore delete it for your portfolio

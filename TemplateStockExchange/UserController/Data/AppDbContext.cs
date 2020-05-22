@@ -23,9 +23,9 @@ namespace UserController.Data
 
         private void SeedData(ModelBuilder builder)
         {
-            User flow_user = new User(1, "flow", "flow@mail.dk", "1234");
-            User ras_user = new User(2, "ras", "ras@mail.dk", "1234");
-            User thom_user = new User(3, "thom", "thom@mail.dk", "1234");
+            User flow_user = new User(1, "flow", "flow@mail.dk", "1234", 50);
+            User ras_user = new User(2, "ras", "ras@mail.dk", "1234", 50);
+            User thom_user = new User(3, "thom", "thom@mail.dk", "1234", 50);
 
             builder.Entity<User>()
                 .HasData(

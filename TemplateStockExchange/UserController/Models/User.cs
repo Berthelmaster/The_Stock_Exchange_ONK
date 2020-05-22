@@ -9,12 +9,13 @@ namespace UserController.Models
 {
     public class User
     {
-        public User(int id, string name, string email, string password)
+        public User(int id, string name, string email, string password, double balance)
         {
             Id = id;
             Name = name;
             Email = email;
             Password = password;
+            Balance = balance;
         }
 
         [Key]
@@ -23,5 +24,6 @@ namespace UserController.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public double Balance { get; set; }
     }
 }

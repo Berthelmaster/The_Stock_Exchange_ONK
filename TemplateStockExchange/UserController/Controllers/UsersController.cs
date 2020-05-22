@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using UserController.Data;
 using UserController.Models;
 using UserController.DTO;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace UserController.Controllers
 {
@@ -51,125 +53,21 @@ namespace UserController.Controllers
             return user;
         }
 
-        //// PUT: api/Users/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{userId}")]
-        //[Route("sell")]
-        //public async Task<HttpStatusCode> SoldStock(int userId, Stock stock)
-        //{
-        //    if (userId != stock.UserId)
-        //    {
-        //        return HttpStatusCode.BadRequest;
-        //    }
-
-        //    User user = _context.Users.Where(u => u.Id == userId).First();
-
-        //    user.Stocks.Remove(stock);
-        //    _context.Entry(user).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (user == null)
-        //        {
-        //            return HttpStatusCode.NotFound;
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return HttpStatusCode.OK;
-        //}
-
-        //// PUT: api/Users/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{userId}")]
-        //[Route("buy")]
-        //public async Task<HttpStatusCode> BoughtStock(int userId, Stock stock)
-        //{
-        //    if (userId != stock.UserId)
-        //    {
-        //        return HttpStatusCode.BadRequest;
-        //    }
-
-        //    User user = _context.Users.Where(u => u.Id == userId).First();
-
-        //    stock.User = user;
-
-        //    user.Stocks.Add(stock);
-        //    _context.Entry(user).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (user == null)
-        //        {
-        //            return HttpStatusCode.NotFound;
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return HttpStatusCode.OK;
-        //}
-
-        // POST: api/Users
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [HttpPut("{userId}")]
+        public async Task<ActionResult> ChangeBalances(int userId, Stock stock)
         {
-            _context.Users.Add(user);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var buyer = await _context.Users.Where(a => a.Id == userId).FirstOrDefaultAsync();
+            var seller = await _context.Users.Where(u => u.Id == stock.UserId).FirstOrDefaultAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
-        }
+            buyer.Balance -= stock.FullPrice;
+            seller.Balance += stock.FullPrice;
 
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            _context.Entry(buyer).State = EntityState.Modified;
+            _context.Entry(seller).State = EntityState.Modified;
 
-            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return user;
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
+            return Ok();
         }
     }
 }

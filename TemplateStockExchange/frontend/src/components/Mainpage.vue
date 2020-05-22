@@ -1,7 +1,13 @@
 <template>
     <v-container>
         <v-container text-center>
-            <h1> Hello {{ this.user.name }}!</h1>
+            <v-row>
+                <h1> Hello {{ this.user.name }}!</h1>
+                <v-spacer></v-spacer>
+                <h3>Balance {{ this.user.Balance }}</h3>
+            </v-row>
+            
+            
         </v-container>
         <v-container>
             <v-row no-gutters class="match">
@@ -18,9 +24,8 @@
                     <v-container>                        
                         <v-container v-for="item in stocks" :key="item.id">
                             <v-row >
-                                <h2>{{ item.id}}</h2>
-                                <h2>{{ item.name }}</h2>
-                                <h2>{{ item.fullPrice}}</h2>
+                                <h2>Stock: {{ item.name }}</h2>
+                                <h2>{{ item.fullPrice}}$</h2>
                                 <v-btn>Buy</v-btn>
                             </v-row>
                         </v-container>
