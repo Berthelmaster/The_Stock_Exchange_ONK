@@ -18,7 +18,7 @@ namespace UserStocksBroker.Controllers
     public class UserStocksBrokerController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly string _userControllerIp = "usercontroller/";
+        private readonly string _userControllerIp = "http://usercontroller:8080";
 
         public UserStocksBrokerController(AppDbContext context)
         {
@@ -42,7 +42,7 @@ namespace UserStocksBroker.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_userControllerIp);
-                message = client.PutAsJsonAsync("api/Users/" + userId, stock).GetAwaiter().GetResult();
+                message = client.PutAsJsonAsync("/api/Users/" + userId, stock).GetAwaiter().GetResult();
             }
 
             return message.StatusCode;
