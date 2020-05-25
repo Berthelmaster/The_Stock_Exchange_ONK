@@ -19,8 +19,8 @@ namespace AvailableStocksBroker.Controllers
     public class AvailableStocksController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly string TobinTaxIp = "https://localhost:44341/";
-        private readonly string UserStocksIp = "https://localhost:44351/";
+        private readonly string TobinTaxIp = "http://tobintaxcontrol:8080/";
+        private readonly string UserStocksIp = "http://userstocksbroker:8080/";
 
         public AvailableStocksController(AppDbContext context)
         {

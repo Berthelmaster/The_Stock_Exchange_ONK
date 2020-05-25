@@ -16,12 +16,16 @@ Vue.use(vuetify);
 const router = new VueRouter({
   routes: [
     {
-      path: "/",
+      path: '/',
       component: Login
     },
     {
-      path: "/mainpage",
+      path: '/mainpage',
       component: Mainpage
+    },
+    {
+      path: '*',
+      component: Login
     }
   ],
   mode: "history"

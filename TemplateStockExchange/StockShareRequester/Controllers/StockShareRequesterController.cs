@@ -17,7 +17,7 @@ namespace StockShareRequester.Controllers
     [ApiController]
     public class StockShareRequesterController : ControllerBase
     {
-        private readonly string ip = "https://localhost:44336/";
+        private readonly string ip = "http://availablestocksbroker:8080/";
 
 
         // PUT: api/StockShareRequester/5

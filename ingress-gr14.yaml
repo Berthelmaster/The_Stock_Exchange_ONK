@@ -22,6 +22,28 @@ spec:
         backend:
           serviceName: usercontroller
           servicePort: 8080
+          
+      - path: /availablestocksbroker/(.*)
+        backend:
+          serviceName: availablestocksbroker
+          servicePort: 8080
+          
+      - path: /stocksharerequester/(.*)
+        backend:
+          serviceName: stocksharerequester
+          servicePort: 8080
+          
+      - path: /stockshareprovider/(.*)
+        backend:
+          serviceName: stockshareprovider
+          servicePort: 8080
+          
+      - path: /(.*)
+        backend:
+          serviceName: frontend
+          servicePort: 8080
+          
+          
 status:
   loadBalancer:
     ingress:
