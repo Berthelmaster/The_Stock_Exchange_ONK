@@ -16,7 +16,7 @@ namespace StockShareProvider.Controllers
     [Route("api/[controller]")]
     public class StockShareProvicerController : ControllerBase
     {
-        private readonly string AvailableStocksIp = "https://localhost:44336/";
+        private readonly string AvailableStocksIp = "http://availablestocksbroker:8080/";
 
         // PUT: api/StockShareRequester/5
         [HttpPut("{userId}")]
