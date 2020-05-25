@@ -35,7 +35,7 @@ namespace UserStocksBroker.Controllers
             Stock newStock = new Stock(stock.Id, stock.Price, stock.FullPrice, stock.Name, stock.Quantity, stock.TimeStamp, userId);
 
             _context.Stock.Add(newStock);
-
+             
             await _context.SaveChangesAsync();
 
             // Change Balance to seller and buyer
