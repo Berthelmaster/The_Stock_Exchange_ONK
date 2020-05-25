@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/add-base-url: "true"
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  creationTimestamp: "2019-09-11T11:48:56Z"
+  generation: 64
+  name: ingress-nginx
+  namespace: itonk-gr14-tseis
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /userstocksbroker/(.*)
+        backend:
+          serviceName: userstocksbroker
+          servicePort: 8080
+          
+      - path: /usercontroller/(.*)
+        backend:
+          serviceName: usercontroller
+          servicePort: 8080
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.1.12
