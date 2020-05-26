@@ -45,6 +45,7 @@ namespace UserController
 
             app.UseCors(builder =>
             {
+                builder.WithOrigins("itonk-gr14-tseis.dk");
                 builder.AllowAnyHeader();
                 builder.AllowAnyOrigin();
                 builder.AllowAnyMethod();
