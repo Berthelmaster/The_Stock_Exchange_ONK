@@ -45,7 +45,6 @@ namespace UserController
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:8080", "https://localhost:8080");
                 builder.AllowAnyHeader();
                 builder.AllowAnyOrigin();
                 builder.AllowAnyMethod();

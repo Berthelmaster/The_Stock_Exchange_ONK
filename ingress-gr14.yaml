@@ -11,7 +11,8 @@ metadata:
   namespace: itonk-gr14-tseis
 spec:
   rules:
-  - http:
+  - host: itonk-gr14-tseis.dk
+    http:
       paths:
       - path: /userstocksbroker/(.*)
         backend:
