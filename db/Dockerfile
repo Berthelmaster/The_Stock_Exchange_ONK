@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/server:2019-latest
+FROM mcr.microsoft.com/mssql/server:2017-latest
 
 ENV SA_PASSWORD Berthelmaster123!
 ENV ACCEPT_EULA Y
