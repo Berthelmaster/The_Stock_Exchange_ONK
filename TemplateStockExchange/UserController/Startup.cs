@@ -27,8 +27,10 @@ namespace UserController
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("F20ITONKTESEISDBServerInternal")));
+   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,18 +41,17 @@ namespace UserController
                 app.UseDeveloperExceptionPage();
             }
 
-            context.Database.Migrate();
-
-            app.UseHttpsRedirection();
-
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:8080", "https://localhost:8080");
+                builder.WithOrigins("itonkgr14tseis.dk");
                 builder.AllowAnyHeader();
                 builder.AllowAnyOrigin();
                 builder.AllowAnyMethod();
             });
 
+            context.Database.Migrate();
+
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

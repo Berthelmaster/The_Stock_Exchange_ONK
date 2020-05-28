@@ -51,7 +51,7 @@ namespace UserStocksBroker
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:8080", "https://localhost:8080");
+                builder.WithOrigins("http://localhost:8080", "https://localhost:8080", "http://itonk-gr14-tseis.dk/");
                 builder.AllowAnyHeader();
                 builder.AllowAnyOrigin();
                 builder.AllowAnyMethod();

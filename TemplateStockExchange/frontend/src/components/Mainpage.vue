@@ -113,6 +113,12 @@ export default {
 
       sellStock(id, stock)
       {
+        if(this.user.balance < stock.fullPrice)
+        {
+            alert('Not Enough Money!')
+            return
+        }
+        
         console.log(sellerService)
         axios.put(sellerService + id, stock)
         .then((response) => {
